@@ -59,7 +59,7 @@ func run() error {
 		if err := explorer.Extract(command.OverwriteDir()); err != nil {
 			dirExistsError := &docxe.UnzipDirExistsError{}
 			if errors.As(err, &dirExistsError) {
-				return errors.New(fmt.Sprintf("Directory %s already exists. Use --overwrite (-o) flag to overwrite\n", explorer.GetUnzipDir()))
+				return fmt.Errorf("Directory %s already exists. Use --overwrite (-o) flag to overwrite\n", explorer.GetUnzipDir())
 			}
 			return err
 		}
@@ -70,7 +70,7 @@ func run() error {
 		if err := explorer.UpdateDocx(); err != nil {
 			dirExistsError := &docxe.UnzipDirExistsError{}
 			if errors.As(err, &dirExistsError) {
-				return errors.New(fmt.Sprintf("Directory '%s' is not exist. There are no sources for updating\n", explorer.GetUnzipDir()))
+				return fmt.Errorf("Directory '%s' is not exist. There are no sources for updating\n", explorer.GetUnzipDir())
 			}
 			return err
 		}

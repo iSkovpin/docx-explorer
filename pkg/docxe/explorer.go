@@ -1,7 +1,6 @@
 package docxe
 
 import (
-	"errors"
 	"fmt"
 	"github.com/iSkovpin/docx-explorer/pkg/compress"
 	"github.com/iSkovpin/docx-explorer/pkg/file"
@@ -97,10 +96,8 @@ func (e *Explorer) UpdateDocx() error {
 		if err := os.RemoveAll(e.docxBkpPath); err != nil {
 			return err
 		}
-	} else {
-		if err := os.Rename(e.tempDocxPath, e.docxPath); err != nil {
-			return err
-		}
+	} else if err := os.Rename(e.tempDocxPath, e.docxPath); err != nil {
+		return err
 	}
 
 	return nil
@@ -128,7 +125,7 @@ func NewExplorer(filename string) (Explorer, error) {
 
 	fileExt := filepath.Ext(filename)
 	if fileExt != ".docx" {
-		err = errors.New(fmt.Sprintf("wrong file extension: '.docx' expected, got '%s'", fileExt))
+		err = fmt.Errorf("wrong file extension: '.docx' expected, got '%s'", fileExt)
 		return d, err
 	}
 
