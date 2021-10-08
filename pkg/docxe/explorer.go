@@ -48,7 +48,7 @@ func (e *Explorer) Extract(overwrite bool) error {
 	}
 
 	if unzipDirExists && !overwrite {
-		return &UnzipDirExistsError{Err: "Directory %s already exists. Use OverwriteDir=true to overwrite", Dir: e.unzipDir}
+		return &UnzipDirExistsError{Err: "Directory %s already exists. Use overwrite=true to overwrite", Dir: e.unzipDir}
 	} else if unzipDirExists && overwrite {
 		if err := e.RemoveExtracted(); err != nil {
 			return err
