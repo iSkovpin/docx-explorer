@@ -314,28 +314,3 @@ func TestNewExplorer(t *testing.T) {
 		})
 	}
 }
-
-func TestUnzipDirExistsError_Error(t *testing.T) {
-	type fields struct {
-		Err string
-		Dir string
-	}
-	tests := []struct {
-		name   string
-		fields fields
-		want   string
-	}{
-		// TODO: Add test cases.
-	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			e := &UnzipDirExistsError{
-				Err: tt.fields.Err,
-				Dir: tt.fields.Dir,
-			}
-			if got := e.Error(); got != tt.want {
-				t.Errorf("Error() = %v, want %v", got, tt.want)
-			}
-		})
-	}
-}
